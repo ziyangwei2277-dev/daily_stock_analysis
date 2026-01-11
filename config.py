@@ -146,7 +146,7 @@ class Config:
         tavily_keys_str = os.getenv('TAVILY_API_KEYS', '')
         tavily_api_keys = [k.strip() for k in tavily_keys_str.split(',') if k.strip()]
         
-        serpapi_keys_str = os.getenv('SERPAPI_KEYS', '')
+        serpapi_keys_str = os.getenv('SERPAPI_API_KEYS', '')
         serpapi_keys = [k.strip() for k in serpapi_keys_str.split(',') if k.strip()]
         
         return cls(

@@ -78,6 +78,7 @@
 |------------|------|:----:|
 | `STOCK_LIST` | 自选股代码，如 `600519,300750,002594` | ✅ |
 | `TAVILY_API_KEYS` | [Tavily](https://tavily.com/) 搜索 API（新闻搜索） | 推荐 |
+| `SERPAPI_API_KEYS` | [SerpAPI](https://serpapi.com/) 备用搜索 | 可选 |
 | `TUSHARE_TOKEN` | [Tushare Pro](https://tushare.pro/) Token | 可选 |
 
 #### 3. 启用 Actions
