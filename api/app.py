@@ -133,7 +133,7 @@ def create_app(static_dir: Optional[Path] = None) -> FastAPI:
             "status": "success",
             "stock_code": stock_code,
             "filename": file_name,
-            "analysis": result.content if result else "AI 分析引擎未返回结果"
+            "analysis": result.report if result else "AI 分析引擎未返回结果"
         }
     
     # ============================================================
