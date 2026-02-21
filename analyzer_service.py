@@ -70,8 +70,9 @@ def analyze_stock(
     )
     
     # 5. 如果 pipeline 结果出来后没有标注，我们在这里做二次强制处理 (可选)
-    if result and result.content:
-        result.content = f"{source_instruction}\n\n{result.content}"
+    if result and result.report:
+        # 将溯源指令和分析报告合并到 report 字段中
+        result.report = f"{source_instruction}\n\n{result.report}"
     
     return result
 
