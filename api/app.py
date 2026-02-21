@@ -129,11 +129,14 @@ def create_app(static_dir: Optional[Path] = None) -> FastAPI:
             reliable_file_name=file_name
         )
 
+        # --- api/app.py 接口返回部分 ---
+
         return {
             "status": "success",
             "stock_code": stock_code,
             "filename": file_name,
-            "analysis": result.report if result else "AI 分析引擎未返回结果"
+            # 这里统一使用 .analysis，并增加一个备选方案
+            "analysis": getattr(result, 'analysis', "AI 分析引擎未返回结果") if result else "分析失败"
         }
     
     # ============================================================
