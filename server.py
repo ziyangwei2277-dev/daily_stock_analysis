@@ -43,12 +43,21 @@ from api.app import app  # noqa: E402
 __all__ = ['app']
 
 
+# 1. 确保在文件顶部导入了 os 模块
+import os
+
+# ... 保留你原来的其他代码 ...
+
 if __name__ == "__main__":
     import uvicorn
+
+    # 核心修改：让程序去读 Zeabur 环境变量里的 PORT。
+    # 如果没读到（比如你在本地运行），它会默认使用 8080。
+    port = int(os.environ.get("PORT", 8080)) 
 
     uvicorn.run(
         "server:app",
         host="0.0.0.0",
-        port=8080,
-        reload=True,
+        port=port,  # 这里不再写死 8000，而是使用变量 port
+        reload=False, # 生产环境建议关闭 reload 以提高稳定性
     )
