@@ -31,7 +31,7 @@ from api.v1.schemas.common import RootResponse, HealthResponse
 from src.services.system_config_service import SystemConfigService
 
 # 核心修改：导入你的分析服务层
-from src.analyzer_service import analyze_stock
+from analyzer_service import analyze_stock
 
 @asynccontextmanager
 async def app_lifespan(app: FastAPI):
