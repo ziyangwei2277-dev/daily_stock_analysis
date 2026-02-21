@@ -69,11 +69,28 @@ def analyze_stock(
         # 如果 pipeline 不支持，我们稍后去改 pipeline.py
     )
     
-    # 5. 如果 pipeline 结果出来后没有标注，我们在这里做二次强制处理 (可选)
-    if result and result.report:
-        # 将溯源指令和分析报告合并到 report 字段中
-        result.report = f"{source_instruction}\n\n{result.report}"
+    # --- analyzer_service.py 核心修改段落 ---
+
+    # 运行单只股票分析
+    result = pipeline.process_single_stock(
+        code=stock_code,
+        skip_analysis=False,
+        single_stock_notify=notifier is not None,
+        report_type=report_type
+    )
+    
+    # 强制注入溯源指令（注意：这里改成了 .analysis）
+    if result:
+        # 探测正确的属性字段
+        attr_name = None
+        for possible_attr in ['analysis', 'report', 'content', 'text']:
+            if hasattr(result, possible_attr):
+                attr_name = possible_attr
+                break
+        
+        if attr_name:
+            current_val = getattr(result, attr_name)
+            new_val = f"{source_instruction}\n\n{current_val}"
+            setattr(result, attr_name, new_val)
     
     return result
-
-# ... analyze_stocks 和 perform_market_review 保持不变 ...
